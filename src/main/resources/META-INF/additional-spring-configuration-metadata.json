@@ -1,0 +1,22 @@
+{"properties": [
+  {
+    "name": "spring.kafka.topic",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.kafka.topic'"
+  },
+  {
+    "name": "spring.kafka.general.kafka-topic",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.kafka.general.kafka-topic'"
+  },
+  {
+    "name": "general.kafka-topic",
+    "type": "java.lang.String",
+    "description": "A description for 'general.kafka-topic'"
+  },
+  {
+    "name": "general.kafka-topic",
+    "type": "java.lang.String",
+    "description": "A description for 'general.kafka-topic'"
+  }
+]}
