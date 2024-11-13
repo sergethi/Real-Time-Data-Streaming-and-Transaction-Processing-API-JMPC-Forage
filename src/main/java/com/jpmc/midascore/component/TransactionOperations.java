@@ -68,4 +68,46 @@ public class TransactionOperations {
 
     }
 
+    public boolean incentiveValidate(Transaction transaction) {
+        Optional<UserRecord> senderOpt = Optional.of(userRepository.findById(transaction.getSenderId())) ;
+        Optional<UserRecord> recipientOpt = Optional.of(userRepository.findById(transaction.getRecipientId()));
+
+        if (senderOpt.isPresent() && recipientOpt.isPresent()) {
+            UserRecord sender = senderOpt.get();
+
+            if(sender.getBalance() >= transaction.getAmount()) {
+                return true; //transaction processed successfully
+            }
+        }
+        return false; //transaction validation failed
+    }
+
+    public void incentiveProcessAndSave(Transaction transaction, float incentiveAmount) {
+        Optional<UserRecord> senderOpt = Optional.of(userRepository.findById(transaction.getSenderId())) ;
+        Optional<UserRecord> recipientOpt = Optional.of(userRepository.findById(transaction.getRecipientId()));
+
+        UserRecord sender = senderOpt.get();
+        UserRecord recipient = recipientOpt.get();
+
+        recipient.setBalance(recipient.getBalance() + incentiveAmount);
+
+        userRepository.save(recipient);
+
+        // Create and save TransactionRecord
+        TransactionRecord transactionRecord = new TransactionRecord();
+        // transactionRecord.setTransaction(transaction);
+        transactionRecord.setSenderId(transaction.getSenderId());
+        transactionRecord.setRecipientId(transaction.getRecipientId());
+        transactionRecord.setAmount(transaction.getAmount());
+        transactionRecord.setSenderBalance(sender.getBalance());
+        transactionRecord.setRecipientBalance(recipient.getBalance());
+
+        transactionRepository.save(transactionRecord);
+
+         //log out specific recipient
+         if ("wilbur".equals(recipient.getName())){
+            logger.info("recipient wilbur's  balance is: {}", Math.floor(recipient.getBalance()));
+        }
+    }
+
 }

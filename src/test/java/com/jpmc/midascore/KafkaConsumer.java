@@ -17,8 +17,13 @@ public class KafkaConsumer {
 
     private static final Logger logger = LoggerFactory.getLogger(KafkaConsumer.class);
 
+    private static boolean incentiveProcess = true;
+
     @Autowired
     private TransactionOperations transactionOperations;
+
+    @Autowired
+    private IncentiveQuerier incentiveQuerier;
 
     @Value("${general.kafka-topic}")
     private String topic;
@@ -27,12 +32,25 @@ public class KafkaConsumer {
     public void listen(Transaction transaction) {
         logger.info("Received transaction: {}", transaction);
 
-        // transaction valdation
-        if (transactionOperations.validateAndProcess(transaction)){
-            logger.info("Transaction processed and saved: {}", transaction);
-        } else{
-            logger.warn("Transaction validation failed: {}", transaction);
+        if (incentiveProcess){
+            if (transactionOperations.incentiveValidate(transaction)){
+                logger.info("Incentive Transaction validated: {}", transaction);
+                //call class method with RestTemplate
+                Transaction icentiveResponse = incentiveQuerier.query(transaction);
+                //call IncentiveProcessAndSave to Save incentive amount to repicpient balance
+                transactionOperations.incentiveProcessAndSave(transaction, icentiveResponse.amount);
+            }else{
+                logger.warn("Incentive Transaction validation failed: {}", transaction);
+            }
+        }else{
+            // transaction valdation
+            if (transactionOperations.validateAndProcess(transaction)){
+                logger.info("Transaction processed and saved: {}", transaction);
+            } else{
+                logger.warn("Transaction validation failed: {}", transaction);
+            }
         }
+      
     }
 
 }
