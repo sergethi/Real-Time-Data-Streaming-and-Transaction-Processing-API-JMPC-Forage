@@ -83,15 +83,18 @@ public class TransactionOperations {
     }
 
     public void incentiveProcessAndSave(Transaction transaction, float incentiveAmount) {
+        logger.info("incentiveProcessAndSave method call: {}, {}", transaction, incentiveAmount);
         Optional<UserRecord> senderOpt = Optional.of(userRepository.findById(transaction.getSenderId())) ;
         Optional<UserRecord> recipientOpt = Optional.of(userRepository.findById(transaction.getRecipientId()));
 
         UserRecord sender = senderOpt.get();
         UserRecord recipient = recipientOpt.get();
 
-        recipient.setBalance(recipient.getBalance() + incentiveAmount);
+        sender.setBalance(sender.getBalance() - transaction.getAmount());
+        recipient.setBalance(recipient.getBalance() + transaction.getAmount() + incentiveAmount);
 
         userRepository.save(recipient);
+        userRepository.save(sender);
 
         // Create and save TransactionRecord
         TransactionRecord transactionRecord = new TransactionRecord();
@@ -105,8 +108,9 @@ public class TransactionOperations {
         transactionRepository.save(transactionRecord);
 
          //log out specific recipient
-         if ("wilbur".equals(recipient.getName())){
-            logger.info("recipient wilbur's  balance is: {}", Math.floor(recipient.getBalance()));
+        if ("wilbur".equals(recipient.getName()) || "wilbur".equals(sender.getName())){
+            logger.info("recipient {} 's  balance is: {}", recipient.getName(), Math.floor(recipient.getBalance()));
+            logger.info("sender wilbur's  balance is: {}", Math.floor(sender.getBalance()));
         }
     }
 

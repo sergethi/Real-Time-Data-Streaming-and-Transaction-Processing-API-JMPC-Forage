@@ -37,8 +37,9 @@ public class KafkaConsumer {
                 logger.info("Incentive Transaction validated: {}", transaction);
                 //call class method with RestTemplate
                 Transaction icentiveResponse = incentiveQuerier.query(transaction);
+                logger.info("icentiveResponse: {}", icentiveResponse);
                 //call IncentiveProcessAndSave to Save incentive amount to repicpient balance
-                transactionOperations.incentiveProcessAndSave(transaction, icentiveResponse.amount);
+                transactionOperations.incentiveProcessAndSave(transaction, icentiveResponse.getAmount());
             }else{
                 logger.warn("Incentive Transaction validation failed: {}", transaction);
             }

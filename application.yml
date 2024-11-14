@@ -1,6 +1,6 @@
 
 server:
-  port: 9000
+  port: 33400
 spring:
    kafka:
      consumer:
