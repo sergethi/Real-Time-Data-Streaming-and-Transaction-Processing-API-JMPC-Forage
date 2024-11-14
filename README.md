@@ -1,6 +1,6 @@
 # Midas
-JPMC Advanced Software Engineering Forage program
-Real-Time-Data-Streaming-and-Transaction-Processing-API-JMPC-Forage
+## JPMC Advanced Software Engineering Forage program
+## Real-Time-Data-Streaming-and-Transaction-Processing-API-JMPC-Forage
 
 * Project Setup
 * Kafka Integration
