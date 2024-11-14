@@ -1,5 +1,6 @@
 package com.jpmc.midascore;
 
+import com.jpmc.midascore.component.IncentiveQuerier;
 import com.jpmc.midascore.component.TransactionOperations;
 import com.jpmc.midascore.foundation.Transaction;
 import org.slf4j.Logger;
@@ -51,7 +52,6 @@ public class KafkaConsumer {
                 logger.warn("Transaction validation failed: {}", transaction);
             }
         }
-      
     }
 
 }

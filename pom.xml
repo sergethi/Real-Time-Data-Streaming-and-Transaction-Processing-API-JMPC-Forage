@@ -19,44 +19,30 @@
     	<spring-kafka.version>3.2.4</spring-kafka.version>
 	</properties>
 	<dependencyManagement>
-    <dependencies>
+		<dependencies>
 
-		<dependency>
-			<groupId>org.scala-lang</groupId>
-			<artifactId>scala-library</artifactId>
-			<version>2.13.6</version>
-		</dependency>
-
-
-		<dependency>
-			<groupId>org.scala-lang</groupId>
-			<artifactId>scala-reflect</artifactId>
-			<version>2.13.5</version>
-		</dependency>
+			<dependency>
+				<groupId>org.scala-lang</groupId>
+				<artifactId>scala-library</artifactId>
+				<version>2.13.6</version>
+			</dependency>
 
 
-		
+			<dependency>
+				<groupId>org.scala-lang</groupId>
+				<artifactId>scala-reflect</artifactId>
+				<version>2.13.5</version>
+			</dependency>
 
+			<dependency>
+				<groupId>org.apache.zookeeper</groupId>
+				<artifactId>zookeeper</artifactId>
+				<version>3.6.4</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
-		<dependency>
-			<groupId>org.apache.zookeeper</groupId>
-			<artifactId>zookeeper</artifactId>
-			<version>3.6.4</version>
-		</dependency>
-
-
-		
-
-        
-        
-        
-    </dependencies>
-</dependencyManagement>
-	
-	
 	<dependencies>
-
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -68,10 +54,10 @@
 		</dependency>
 
 		<dependency>
-    <groupId>org.springframework.kafka</groupId>
-    <artifactId>spring-kafka</artifactId>
-    <version>3.2.4</version>
-</dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+			<version>3.2.4</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.apache.kafka</groupId>

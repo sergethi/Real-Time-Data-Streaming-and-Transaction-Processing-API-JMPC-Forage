@@ -1,4 +1,4 @@
-package com.jpmc.midascore;
+package com.jpmc.midascore.component;
 import com.jpmc.midascore.foundation.Transaction;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Component;

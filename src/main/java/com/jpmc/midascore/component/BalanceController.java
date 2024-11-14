@@ -1,8 +1,8 @@
-package com.jpmc.midascore;
+package com.jpmc.midascore.component;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +15,7 @@ import com.jpmc.midascore.repository.UserRepository;
 public class BalanceController {
     private UserRepository userRepository;
 
-     @Autowired
+    //  @Autowired
     public BalanceController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -30,7 +30,6 @@ public class BalanceController {
         else{
             return new Balance(0);
         }
-       
 
     }
 }

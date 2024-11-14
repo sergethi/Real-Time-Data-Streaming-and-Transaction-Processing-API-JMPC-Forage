@@ -19,12 +19,6 @@ spring:
       path: /h2-console
    jpa:
     database-platform: org.hibernate.dialect.H2Dialect
-        # key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-        # value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-    #  producer:
-    #     bootstrap-servers: localhost:9092
-    #     key-serializer: org.apache.kafka.common.serialization.StringSerializer
-    #     value-serializer: org.apache.kafka.common.serialization.StringSerializer
 general:
   kafka-topic: transaction-topic
 
